@@ -1,25 +1,37 @@
-import { Categories } from "../components/Categories";
+import { useState } from "react";
+import { Categories } from "../components/Categories/Categories";
+import { Products } from "../components/Products/Products";
 import { mockProducts } from "../materials/mock";
 
 const data = mockProducts;
 
-export const ProductsPage = () => {
-  const categories = Array.from(
+const calculateDefaultCategories = () => {
+  return Array.from(
     new Set(
       data.reduce((acc, val) => {
         return [...acc, ...val.categories];
       }, [] as string[])
     )
   );
+};
+
+export const ProductsPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const categories = calculateDefaultCategories();
 
   const onCategorySelect = (name: string) => {
-    console.log(name);
+    setSelectedCategory(name);
   };
+
+  const filteredProducts = data.filter((product) =>
+    product.categories.some((category) => category === selectedCategory)
+  );
 
   return (
     <div>
       <Categories categories={categories} onCategorySelect={onCategorySelect} />
-      Products
+      <Products products={filteredProducts} />
     </div>
   );
 };

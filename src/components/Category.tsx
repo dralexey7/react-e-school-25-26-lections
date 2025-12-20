@@ -4,5 +4,9 @@ interface CategoryProps {
 }
 
 export const Category: React.FC<CategoryProps> = ({ name, onClick }) => {
-  return <button onClick={onClick}>{name}</button>;
+  return (
+    <div>
+      <button onClick={onClick}>{name}</button>
+    </div>
+  );
 };

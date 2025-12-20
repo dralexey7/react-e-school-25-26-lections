@@ -1,0 +1,8 @@
+.container {
+    border: 1px dashed darksalmon;
+    padding: 16px;  
+}
+
+.secondClass {
+    background-color: lightcyan;
+}

@@ -1,4 +1,5 @@
-import { Category } from "./Category";
+import { Category } from "../Category";
+import styles from "./styles.module.css";
 
 interface CategoriesProps {
   categories: string[];
@@ -9,11 +10,11 @@ export const Categories: React.FC<CategoriesProps> = ({
   categories,
   onCategorySelect,
 }) => {
-  console.log(categories);
   return (
-    <div id="categories">
+    <div id="categories" className={styles.container}>
       {categories.map((category) => (
         <Category
+          key={category}
           name={category}
           onClick={() => {
             onCategorySelect(category);
