@@ -1,4 +1,4 @@
-import { Category } from "../Category";
+import { Category } from "../Category/Category";
 import styles from "./styles.module.css";
 
 interface CategoriesProps {
@@ -16,7 +16,12 @@ export const Categories: React.FC<CategoriesProps> = ({
   const isAllSelected = !selectedCategory;
 
   return (
-    <div id="categories" className={styles.container} role="toolbar" aria-label="Категории">
+    <div
+      id="categories"
+      className={styles.container}
+      role="toolbar"
+      aria-label="Категории"
+    >
       <Category
         name="Все"
         isSelected={isAllSelected}
