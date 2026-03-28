@@ -1,12 +1,25 @@
+import cn from "classnames";
+import styles from "./Category.module.css";
+
 interface CategoryProps {
   name: string;
+  isSelected: boolean;
   onClick: () => void;
 }
 
-export const Category: React.FC<CategoryProps> = ({ name, onClick }) => {
+export const Category: React.FC<CategoryProps> = ({
+  name,
+  isSelected,
+  onClick,
+}) => {
   return (
-    <div>
-      <button onClick={onClick}>{name}</button>
-    </div>
+    <button
+      type="button"
+      className={cn(styles.button, isSelected && styles.buttonSelected)}
+      onClick={onClick}
+      aria-pressed={isSelected}
+    >
+      {name}
+    </button>
   );
 };

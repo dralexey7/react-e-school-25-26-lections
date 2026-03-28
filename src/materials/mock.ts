@@ -1,45 +1,58 @@
-export const mockProducts = [
+import type { Product } from "../types/Product";
+
+export const mockProducts: Product[] = [
   {
     id: "p1a2b3c4-d5e6-7f8a-9b0c-1d2e3f4a5b6c",
     name: "iPhone 15 Pro",
     price: 999,
-    description: "Новейший смартфон с процессором A17 Pro, камерой 48 МП и дисплеем Super Retina XDR",
+    description:
+      "Новейший смартфон с процессором A17 Pro, камерой 48 МП и дисплеем Super Retina XDR",
     categories: ["Электроника"],
     brand: "Apple",
     rating: 4.8,
     specifications: {
-      features: ["Процессор A17 Pro", "Камера 48 МП", "Дисплей Super Retina XDR"],
+      features: [
+        "Процессор A17 Pro",
+        "Камера 48 МП",
+        "Дисплей Super Retina XDR",
+      ],
       details: {
         display: "6.1 дюйма",
         storage: "128GB, 256GB, 512GB, 1TB",
-        colors: "Натуральный титан, Синий титан, Белый титан, Черный титан"
+        colors: "Натуральный титан, Синий титан, Белый титан, Черный титан",
       },
-      variants: ["128GB", "256GB", "512GB", "1TB"]
+      variants: ["128GB", "256GB", "512GB", "1TB"],
     },
   },
   {
     id: "p2b3c4d5-e6f7-8a9b-0c1d-2e3f4a5b6c7d",
     name: "Samsung Galaxy S24",
     price: 899,
-    description: "Флагманский Android-смартфон с экраном Dynamic AMOLED 2X и тройной камерой",
+    description:
+      "Флагманский Android-смартфон с экраном Dynamic AMOLED 2X и тройной камерой",
     categories: ["Электроника"],
     brand: "Samsung",
     rating: 4.7,
     specifications: {
-      features: ["Экран Dynamic AMOLED 2X", "Тройная камера", "Быстрая зарядка"],
+      features: [
+        "Экран Dynamic AMOLED 2X",
+        "Тройная камера",
+        "Быстрая зарядка",
+      ],
       details: {
         display: "6.2 дюйма",
         storage: "128GB, 256GB, 512GB",
-        colors: "Оникс черный, Мраморный серый, Кобальтовый фиолетовый"
+        colors: "Оникс черный, Мраморный серый, Кобальтовый фиолетовый",
       },
-      variants: ["128GB", "256GB", "512GB"]
+      variants: ["128GB", "256GB", "512GB"],
     },
   },
   {
     id: "p3c4d5e6-f7a8-9b0c-1d2e-3f4a5b6c7d8e",
     name: "MacBook Air M3",
     price: 1299,
-    description: "Ультратонкий ноутбук с чипом Apple M3, дисплеем 13.6 дюйма и до 18 часов работы",
+    description:
+      "Ультратонкий ноутбук с чипом Apple M3, дисплеем 13.6 дюйма и до 18 часов работы",
     categories: ["Электроника"],
     brand: "Apple",
     rating: 4.9,
@@ -49,27 +62,32 @@ export const mockProducts = [
         processor: "Apple M3",
         memory: "8GB, 16GB, 24GB",
         storage: "256GB, 512GB, 1TB, 2TB",
-        colors: "Серебристый, Космический серый, Золотой, Полночный"
+        colors: "Серебристый, Космический серый, Золотой, Полночный",
       },
-      variants: ["8GB/256GB", "16GB/512GB", "24GB/1TB"]
+      variants: ["8GB/256GB", "16GB/512GB", "24GB/1TB"],
     },
   },
   {
     id: "p4d5e6f7-a8b9-0c1d-2e3f-4a5b6c7d8e9f",
     name: "Sony WH-1000XM5",
     price: 399,
-    description: "Беспроводные наушники с активным шумоподавлением и автономностью до 30 часов",
+    description:
+      "Беспроводные наушники с активным шумоподавлением и автономностью до 30 часов",
     categories: ["Электроника"],
     brand: "Sony",
     rating: 4.6,
     specifications: {
-      features: ["Активное шумоподавление", "Автономность 30 часов", "Быстрая зарядка"],
+      features: [
+        "Активное шумоподавление",
+        "Автономность 30 часов",
+        "Быстрая зарядка",
+      ],
       details: {
         battery: "30 часов",
         bluetooth: "5.2",
-        colors: "Черный, Серебристый"
+        colors: "Черный, Серебристый",
       },
-      variants: ["Черный", "Серебристый"]
+      variants: ["Черный", "Серебристый"],
     },
   },
   {
@@ -86,16 +104,17 @@ export const mockProducts = [
         material: "98% хлопок, 2% эластан",
         fit: "Slim, Regular, Relaxed",
         sizes: "28, 30, 32, 34, 36, 38, 40",
-        colors: "Синий, Черный, Светло-синий"
+        colors: "Синий, Черный, Светло-синий",
       },
-      variants: ["28", "30", "32", "34", "36", "38", "40"]
+      variants: ["28", "30", "32", "34", "36", "38", "40"],
     },
   },
   {
     id: "p6f7a8b9-c0d1-2e3f-4a5b-6c7d8e9f0a1b",
     name: "Кроссовки спортивные",
     price: 129,
-    description: "Удобные кроссовки для бега и повседневной носки с амортизацией",
+    description:
+      "Удобные кроссовки для бега и повседневной носки с амортизацией",
     categories: ["Одежда", "Спорт"],
     brand: "Nike",
     rating: 4.7,
@@ -104,16 +123,17 @@ export const mockProducts = [
       details: {
         material: "Синтетическая кожа и сетка",
         sizes: "38, 39, 40, 41, 42, 43, 44, 45, 46",
-        colors: "Черный/Белый, Серый, Синий, Красный"
+        colors: "Черный/Белый, Серый, Синий, Красный",
       },
-      variants: ["38", "39", "40", "41", "42", "43", "44", "45", "46"]
+      variants: ["38", "39", "40", "41", "42", "43", "44", "45", "46"],
     },
   },
   {
     id: "p7a8b9c0-d1e2-3f4a-5b6c-7d8e9f0a1b2c",
     name: "Куртка зимняя",
     price: 199,
-    description: "Теплая зимняя куртка с утеплителем и водоотталкивающей пропиткой",
+    description:
+      "Теплая зимняя куртка с утеплителем и водоотталкивающей пропиткой",
     categories: ["Одежда"],
     brand: "The North Face",
     rating: 4.6,
@@ -124,9 +144,9 @@ export const mockProducts = [
         insulation: "Пух 700 fill power",
         sizes: "XS, S, M, L, XL, XXL",
         colors: "Черный, Синий, Красный, Серый",
-        temperature: "Комфорт при -10°C до -25°C"
+        temperature: "Комфорт при -10°C до -25°C",
       },
-      variants: ["XS", "S", "M", "L", "XL", "XXL"]
+      variants: ["XS", "S", "M", "L", "XL", "XXL"],
     },
   },
   {
@@ -143,28 +163,33 @@ export const mockProducts = [
         material: "100% хлопок",
         sizes: "XS, S, M, L, XL, XXL",
         colors: "Белый, Черный, Серый, Синий, Красный, Зеленый",
-        fit: "Regular"
+        fit: "Regular",
       },
-      variants: ["XS", "S", "M", "L", "XL", "XXL"]
+      variants: ["XS", "S", "M", "L", "XL", "XXL"],
     },
   },
   {
     id: "p9c0d1e2-f3a4-5b6c-7d8e-9f0a1b2c3d4e",
     name: "Кофемашина автоматическая",
     price: 599,
-    description: "Автоматическая кофемашина с функцией приготовления капучино и латте",
+    description:
+      "Автоматическая кофемашина с функцией приготовления капучино и латте",
     categories: ["Дом и сад"],
     brand: "De'Longhi",
     rating: 4.8,
     specifications: {
-      features: ["Автоматическое приготовление капучино", "Регулировка крепости", "Температура пара"],
+      features: [
+        "Автоматическое приготовление капучино",
+        "Регулировка крепости",
+        "Температура пара",
+      ],
       details: {
         waterTank: "1.8 литра",
         beanHopper: "250 грамм",
         power: "1450 Вт",
-        dimensions: "43x45x60 см"
+        dimensions: "43x45x60 см",
       },
-      variants: ["Черный", "Белый", "Серебристый"]
+      variants: ["Черный", "Белый", "Серебристый"],
     },
   },
   {
@@ -176,33 +201,42 @@ export const mockProducts = [
     brand: "Xiaomi",
     rating: 4.5,
     specifications: {
-      features: ["LIDAR навигация", "Влажная уборка", "Приложение для управления"],
+      features: [
+        "LIDAR навигация",
+        "Влажная уборка",
+        "Приложение для управления",
+      ],
       details: {
         battery: "5200 мАч, 150 минут",
         dustbin: "0.57 литра",
         waterTank: "0.2 литра",
-        navigation: "Картирование в реальном времени"
+        navigation: "Картирование в реальном времени",
       },
-      variants: ["Черный", "Белый"]
+      variants: ["Черный", "Белый"],
     },
   },
   {
     id: "p1e2f3a4-b5c6-7d8e-9f0a-1b2c3d4e5f6a",
     name: "Набор кастрюль",
     price: 149,
-    description: "Набор из 5 кастрюль разного размера с антипригарным покрытием",
+    description:
+      "Набор из 5 кастрюль разного размера с антипригарным покрытием",
     categories: ["Дом и сад"],
     brand: "Tefal",
     rating: 4.6,
     specifications: {
-      features: ["Антипригарное покрытие", "Стеклянные крышки", "Подходит для всех плит"],
+      features: [
+        "Антипригарное покрытие",
+        "Стеклянные крышки",
+        "Подходит для всех плит",
+      ],
       details: {
         pieces: "5 штук",
         sizes: "16, 18, 20, 22, 24 см",
         material: "Алюминий",
-        compatibility: "Индукция, газовая, электрическая плита, духовка"
+        compatibility: "Индукция, газовая, электрическая плита, духовка",
       },
-      variants: ["Набор 5 шт"]
+      variants: ["Набор 5 шт"],
     },
   },
   {
@@ -218,16 +252,17 @@ export const mockProducts = [
       details: {
         volume: "400 мл",
         ingredients: "Кокосовое масло, Экстракт алоэ, Витамин E",
-        hairTypes: "Все типы волос"
+        hairTypes: "Все типы волос",
       },
-      variants: ["400 мл"]
+      variants: ["400 мл"],
     },
   },
   {
     id: "p3a4b5c6-d7e8-9f0a-1b2c-3d4e5f6a7b8c",
     name: "Велосипед горный",
     price: 449,
-    description: "Горный велосипед с 21 передачей, алюминиевой рамой и дисковыми тормозами",
+    description:
+      "Горный велосипед с 21 передачей, алюминиевой рамой и дисковыми тормозами",
     categories: ["Спорт"],
     brand: "Trek",
     rating: 4.7,
@@ -238,9 +273,9 @@ export const mockProducts = [
         gears: "3x7 скоростей",
         brakes: "Дисковые механические",
         sizes: "XS, S, M, L, XL",
-        weight: "14.5 кг"
+        weight: "14.5 кг",
       },
-      variants: ["XS", "S", "M", "L", "XL"]
+      variants: ["XS", "S", "M", "L", "XL"],
     },
   },
   {
@@ -257,9 +292,9 @@ export const mockProducts = [
         weight: "2-20 кг каждая",
         step: "1 кг",
         pieces: "2 штуки",
-        material: "Чугун, сталь"
+        material: "Чугун, сталь",
       },
-      variants: ["2 шт"]
+      variants: ["2 шт"],
     },
   },
   {
@@ -271,21 +306,26 @@ export const mockProducts = [
     brand: "Lululemon",
     rating: 4.6,
     specifications: {
-      features: ["Антискользящее покрытие", "Водонепроницаемый", "Легко чистится"],
+      features: [
+        "Антискользящее покрытие",
+        "Водонепроницаемый",
+        "Легко чистится",
+      ],
       details: {
         dimensions: "183x61 см",
         thickness: "5 мм",
         weight: "1.3 кг",
-        material: "Полиуретан и каучук"
+        material: "Полиуретан и каучук",
       },
-      variants: ["Черный", "Серый", "Фиолетовый", "Розовый"]
+      variants: ["Черный", "Серый", "Фиолетовый", "Розовый"],
     },
   },
   {
     id: "p6d7e8f9-a0b1-2c3d-4e5f-6a7b8c9d0e1f",
     name: "Беговая дорожка",
     price: 799,
-    description: "Электрическая беговая дорожка с дисплеем и программами тренировок",
+    description:
+      "Электрическая беговая дорожка с дисплеем и программами тренировок",
     categories: ["Спорт"],
     brand: "NordicTrack",
     rating: 4.4,
@@ -296,9 +336,9 @@ export const mockProducts = [
         maxSpeed: "20 км/ч",
         incline: "0-12%",
         runningSurface: "152x51 см",
-        maxWeight: "150 кг"
+        maxWeight: "150 кг",
       },
-      variants: ["Стандарт"]
+      variants: ["Стандарт"],
     },
   },
   {
@@ -316,9 +356,9 @@ export const mockProducts = [
         format: "Твердый переплет",
         language: "Русский",
         year: "2023",
-        isbn: "978-5-17-123456-7"
+        isbn: "978-5-17-123456-7",
       },
-      variants: ["Твердый переплет"]
+      variants: ["Твердый переплет"],
     },
   },
   {
@@ -330,15 +370,19 @@ export const mockProducts = [
     brand: "O'Reilly",
     rating: 4.7,
     specifications: {
-      features: ["7-е издание", "Актуальная информация", "Практические примеры"],
+      features: [
+        "7-е издание",
+        "Актуальная информация",
+        "Практические примеры",
+      ],
       details: {
         pages: "1096",
         format: "Мягкий переплет",
         language: "Английский",
         year: "2024",
-        isbn: "978-1-491-90424-0"
+        isbn: "978-1-491-90424-0",
       },
-      variants: ["Мягкий переплет"]
+      variants: ["Мягкий переплет"],
     },
   },
   {
@@ -355,9 +399,9 @@ export const mockProducts = [
         books: "7",
         totalPages: "4100",
         format: "Твердый переплет",
-        language: "Русский"
+        language: "Русский",
       },
-      variants: ["Полное собрание"]
+      variants: ["Полное собрание"],
     },
   },
   {
@@ -375,9 +419,9 @@ export const mockProducts = [
         format: "Твердый переплет",
         language: "Русский",
         recipes: "150",
-        year: "2023"
+        year: "2023",
       },
-      variants: ["Твердый переплет"]
+      variants: ["Твердый переплет"],
     },
   },
 ];

@@ -1,0 +1,23 @@
+.root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, #f8fafc 0%, #eef2ff 45%, #faf5ff 100%);
+}
+
+.header {
+  padding: 1.25rem 1.5rem 0.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.main {
+  flex: 1;
+  padding: 0 1.5rem 2rem;
+}

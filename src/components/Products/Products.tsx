@@ -1,7 +1,6 @@
 import type { Product as ProductType } from "../../types/Product";
-import { Product } from "../Product";
+import { Product } from "../Product/Product";
 import styles from "./styles.module.css";
-import cn from "classnames";
 
 interface ProductsProps {
   products?: ProductType[];
@@ -13,9 +12,11 @@ export const Products: React.FC<ProductsProps> = ({ products }) => {
   }
 
   return (
-    <div className={cn(styles.container, styles.secondClass)}>
+    <div className={styles.grid}>
       {products.map((product) => (
-        <Product product={product} key={product.id} />
+        <div key={product.id} className={styles.cell}>
+          <Product product={product} />
+        </div>
       ))}
     </div>
   );

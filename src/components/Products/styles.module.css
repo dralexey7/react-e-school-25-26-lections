@@ -1,8 +1,25 @@
-.container {
-    border: 1px dashed darksalmon;
-    padding: 16px;  
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1.35rem;
+  align-items: stretch;
+  align-content: start;
 }
 
-.secondClass {
-    background-color: lightcyan;
+/* Сбрасываем min-width:auto у grid-item — иначе длинный контент растягивает ячейку и ломает сетку */
+.cell {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+}
+
+.cell > * {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 80rem) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

@@ -1,0 +1,22 @@
+.root {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.text {
+  margin: 0 0 1rem;
+  font-size: 1.125rem;
+  color: #64748b;
+}
+
+.link {
+  display: inline-block;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
