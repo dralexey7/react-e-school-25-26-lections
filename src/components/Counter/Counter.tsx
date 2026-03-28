@@ -2,31 +2,25 @@ import styles from "./Counter.module.css";
 
 interface CounterProps {
   value: number;
-  onChange: (value: number) => void;
+  increase: () => void;
+  decrease: () => void;
   min?: number;
   max?: number;
 }
 
 export const Counter: React.FC<CounterProps> = ({
   value,
-  onChange,
+  increase,
+  decrease,
   min = 0,
   max = Number.MAX_SAFE_INTEGER,
 }) => {
-  const dec = () => {
-    onChange(Math.max(min, value - 1));
-  };
-
-  const inc = () => {
-    onChange(Math.min(max, value + 1));
-  };
-
   return (
     <div className={styles.root} role="group" aria-label="Количество">
       <button
         type="button"
         className={styles.button}
-        onClick={dec}
+        onClick={decrease}
         disabled={value <= min}
         aria-label="Уменьшить"
       >
@@ -38,7 +32,7 @@ export const Counter: React.FC<CounterProps> = ({
       <button
         type="button"
         className={styles.button}
-        onClick={inc}
+        onClick={increase}
         disabled={value >= max}
         aria-label="Увеличить"
       >

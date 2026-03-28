@@ -1,23 +1,38 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useParams } from "react-router";
 import { Counter } from "../../components/Counter/Counter";
 import { mockProducts } from "../../materials/mock";
+import { selectProductCountById } from "../../store/selectors/selectProductCountById";
+import { addToBasket, deleteFromBasket } from "../../store/slices/basketSlice";
+import type { AppDispatch, RootState } from "../../store/store";
 import styles from "./ProductDetailPage.module.css";
 import { ProductNotFound } from "./ProductNotFound";
 
 export const ProductDetailPage = () => {
-  const [quantity, setQuantity] = useState(0);
+  const dispatch = useDispatch<AppDispatch>();
   const { productId } = useParams<{ productId: string }>();
   const location = useLocation();
   const listSearch = location.search;
 
   const product = mockProducts.find((p) => p.id === productId);
 
+  const quantity = useSelector((state: RootState) =>
+    productId ? selectProductCountById(state, productId) : 0,
+  );
+
   if (!product) {
     return <ProductNotFound catalogSearch={listSearch} />;
   }
 
   const { specifications } = product;
+
+  const handleIncrease = () => {
+    dispatch(addToBasket(product.id));
+  };
+
+  const handleDecrease = () => {
+    dispatch(deleteFromBasket(product.id));
+  };
 
   return (
     <div className={styles.page}>
@@ -55,7 +70,11 @@ export const ProductDetailPage = () => {
           </p>
           <div className={styles.counterBlock}>
             <span className={styles.counterLabel}>Количество</span>
-            <Counter value={quantity} onChange={setQuantity} />
+            <Counter
+              value={quantity}
+              increase={handleIncrease}
+              decrease={handleDecrease}
+            />
           </div>
         </div>
 

@@ -1,20 +1,33 @@
-import { useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { Counter } from "../Counter/Counter";
 import type { Product as ProductType } from "../../types/Product";
 import styles from "./Product.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../store/store";
+import { addToBasket, deleteFromBasket } from "../../store/slices/basketSlice";
+import { selectProductCountById } from "../../store/selectors/selectProductCountById";
 
 interface ProductProps {
   product: ProductType;
 }
 
 export const Product: React.FC<ProductProps> = ({ product }) => {
-  const [quantity, setQuantity] = useState(0);
+  const quantity = useSelector((state: RootState) =>
+    selectProductCountById(state, product.id),
+  );
   const [searchParams] = useSearchParams();
   const qs = searchParams.toString();
+  const dispatch = useDispatch<AppDispatch>();
   const to = qs ? `/products/${product.id}?${qs}` : `/products/${product.id}`;
 
   const isBooks = product.categories.some((category) => category === "Книги");
+  const handleIncrease = () => {
+    dispatch(addToBasket(product.id));
+  };
+
+  const handleDecrease = () => {
+    dispatch(deleteFromBasket(product.id));
+  };
 
   return (
     <div className={styles.card}>
@@ -27,7 +40,9 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
               </span>
             ))}
             {product.categories.length > 2 ? (
-              <span className={styles.badgeMuted}>+{product.categories.length - 2}</span>
+              <span className={styles.badgeMuted}>
+                +{product.categories.length - 2}
+              </span>
             ) : null}
           </div>
           {isBooks ? <span className={styles.bookTag}>Книга</span> : null}
@@ -37,11 +52,17 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
         <p className={styles.description}>{product.description}</p>
       </Link>
       <div className={styles.counterRow}>
-        <Counter value={quantity} onChange={setQuantity} />
+        <Counter
+          value={quantity}
+          increase={handleIncrease}
+          decrease={handleDecrease}
+        />
       </div>
       <Link className={styles.linkedFooter} to={to}>
         <div className={styles.footer}>
-          <span className={styles.price}>{product.price.toLocaleString("ru-RU")} ₽</span>
+          <span className={styles.price}>
+            {product.price.toLocaleString("ru-RU")} ₽
+          </span>
           <span className={styles.rating} aria-hidden>
             ★ {product.rating}
           </span>
