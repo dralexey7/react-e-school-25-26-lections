@@ -1,0 +1,70 @@
+
+:root {
+  --palette-neutral-0: #ffffff;
+  --palette-neutral-50: #f8fafc;
+  --palette-neutral-100: #f1f5f9;
+  --palette-neutral-200: #e2e8f0;
+  --palette-neutral-300: #cbd5e1;
+  --palette-neutral-500: #64748b;
+  --palette-neutral-600: #475569;
+  --palette-neutral-700: #334155;
+  --palette-neutral-800: #1e293b;
+  --palette-neutral-900: #0f172a;
+
+  --palette-primary-soft: #eef2ff;
+  --palette-primary-100: #e0e7ff;
+  --palette-primary-200: #c7d2fe;
+  --palette-primary-600: #4f46e5;
+  --palette-primary-700: #4338ca;
+
+  --palette-warm-soft: #ffedd5;
+  --palette-warm-700: #b45309;
+  --palette-warm-800: #9a3412;
+
+  --palette-rgb-neutral: 15 23 42;
+  --palette-rgb-primary: 79 70 229;
+
+
+  --color-bg-gradient: linear-gradient(
+    160deg,
+    var(--palette-neutral-50) 0%,
+    var(--palette-primary-soft) 100%
+  );
+
+  --color-surface: var(--palette-neutral-0);
+  --color-surface-glass: rgb(255 255 255 / 75%);
+  --color-surface-muted: var(--palette-neutral-100);
+
+  --color-border: var(--palette-neutral-200);
+  --color-border-strong: var(--palette-neutral-300);
+
+  --color-text: var(--palette-neutral-900);
+  --color-text-heading: var(--palette-neutral-800);
+  --color-text-body: var(--palette-neutral-600);
+  --color-text-secondary: var(--palette-neutral-500);
+  --color-text-emphasis: var(--palette-neutral-700);
+
+  --color-link: var(--palette-primary-600);
+  --color-primary: var(--palette-primary-600);
+  --color-primary-strong: var(--palette-primary-700);
+  --color-primary-soft: var(--palette-primary-soft);
+  --color-primary-container: var(--palette-primary-100);
+  --color-primary-outline: var(--palette-primary-200);
+  --color-on-primary: var(--palette-neutral-0);
+
+  --color-warm: var(--palette-warm-700);
+  --color-warm-strong: var(--palette-warm-800);
+  --color-warm-soft: var(--palette-warm-soft);
+
+  --color-shadow-sm: rgb(var(--palette-rgb-neutral) / 5%);
+  --color-shadow-md: rgb(var(--palette-rgb-neutral) / 6%);
+  --color-shadow-primary: rgb(var(--palette-rgb-primary) / 12%);
+  --color-shadow-primary-deep: rgb(var(--palette-rgb-primary) / 35%);
+
+  --shadow-card: 0 1px 3px var(--color-shadow-sm);
+  --shadow-panel: 0 1px 3px var(--color-shadow-md);
+  --shadow-card-hover:
+    0 12px 28px var(--color-shadow-primary),
+    0 4px 10px var(--color-shadow-md);
+  --shadow-selected: 0 2px 8px var(--color-shadow-primary-deep);
+}

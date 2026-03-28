@@ -49,7 +49,13 @@ const TrackedChild: React.FC<TrackedChildProps> = ({
   }, [onIncrement]);
 
   return (
-    <div style={{ border: "1px solid #ccc", padding: "12px", minWidth: "200px" }}>
+    <div
+      style={{
+        border: "1px solid var(--color-border-strong)",
+        padding: "12px",
+        minWidth: "200px",
+      }}
+    >
       <div>{label}</div>
       <div>Render id: {renderId}</div>
       <div>Effect runs: {effectRuns}</div>
