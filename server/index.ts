@@ -1,9 +1,15 @@
 import express from "express";
 import { mockProducts } from "../src/materials/mock.ts";
+import cors from "express-cors";
 
-const PORT = 3005;
+const PORT = 3006;
 
 const app = express();
+app.use(
+  cors({
+    allowedOrigins: ["localhost:5173"],
+  }),
+);
 
 app.get("/products", (_req, res) => {
   res.json(mockProducts);
