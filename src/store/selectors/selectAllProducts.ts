@@ -1,6 +1,6 @@
 import { mockProducts } from "../../materials/mock";
 import type { Product } from "../../types/Product";
-import type { RootState } from "../store";
+import type { RootState } from "../rootReducer";
 
 export const selectAllProducts = (state: RootState): Product[] => {
   const productIds = state.basket.map((item) => item[0]);

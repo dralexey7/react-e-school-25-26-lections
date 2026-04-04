@@ -1,16 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { loggerMiddleware } from "./middleware/loggerMiddleware";
-import { basketReducer } from "./slices/basketSlice";
-import { productSliceReducer } from "./slices/productsSlice";
+import { listenerMiddleware } from "./middleware/clearToHeavyBasket";
+import { rootReducer } from "./rootReducer";
 
 export const store = configureStore({
-  reducer: {
-    basket: basketReducer,
-    products: productSliceReducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(loggerMiddleware),
+    getDefaultMiddleware()
+      .prepend(listenerMiddleware.middleware)
+      .concat(loggerMiddleware),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type { RootState } from "./rootReducer";
 export type AppDispatch = typeof store.dispatch;

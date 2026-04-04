@@ -1,4 +1,4 @@
-import type { RootState } from "../store";
+import type { RootState } from "../rootReducer";
 import { selectAllProducts } from "./selectAllProducts";
 import { selectProductCountById } from "./selectProductCountById";
 
