@@ -67,7 +67,7 @@ type ProductFormBodyProps = {
   mode: "create" | "edit";
   /** Для режима edit — id из URL (нужен для updateProductThunk). */
   editingProductId?: string;
-  /** Для create — undefined; для edit — товар из mock (позже заменить на данные из Redux). */
+  /** Для create — undefined; для edit — источник данных см. TODO-05 / стор после TODO-04. */
   initialProduct?: Product;
 };
 
@@ -106,10 +106,9 @@ function ProductFormBody({
     };
 
     /*
-     * TODO(лекция): отправить payload на сервер и обновить Redux.
-     * — create: dispatch(postProductThunk(payload)), id придёт в ответе.
-     * — edit: dispatch(updateProductThunk({ id: editingProductId!, ...payload })) или частичный PATCH.
-     * После unwrap: navigate(`/products/${newId}`) или `/products`.
+     * TODO-06 (лекция): отправить payload (thunks из TODO-03) и обновить стор (TODO-04).
+     * — create: postProductThunk(payload) → navigate(`/products/${newId}`).
+     * — edit: updateProductThunk({ id: editingProductId!, ...payload }) → navigate назад или на карточку.
      */
     void payload;
   };
@@ -302,7 +301,7 @@ export const ProductFormPage = ({ mode }: ProductFormPageProps) => {
     );
   }
 
-  // TODO(лекция): когда initialProduct будет из Redux, добавьте в key версию/revision товара, чтобы форма обновлялась после refetch.
+  // TODO-09 (лекция): когда initialProduct из Redux — расширить key (revision/updatedAt), чтобы форма сбрасывалась после refetch.
   const formKey = `${mode}-${productId ?? "new"}`;
 
   return (

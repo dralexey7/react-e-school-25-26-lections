@@ -14,7 +14,7 @@ export const ProductDetailPage = () => {
   const location = useLocation();
   const listSearch = location.search;
 
-  // TODO(лекция): брать товар из Redux (список с сервера), чтобы после create/update/delete UI не расходился с API.
+  // TODO-05 (лекция): брать товар из Redux (селектор по productId), чтобы деталка совпадала с API после CRUD.
   const product = mockProducts.find((p) => p.id === productId);
 
   const quantity = useSelector((state: RootState) =>
@@ -37,10 +37,10 @@ export const ProductDetailPage = () => {
 
   const handleDeleteProduct = () => {
     /*
-     * TODO(лекция):
+     * TODO-07 (лекция):
      * 1. Подтверждение: window.confirm(...) или свой модал.
      * 2. dispatch(deleteProductThunk(product.id)) и при успехе:
-     *    — убрать позицию из корзины (отдельный dispatch / listenerMiddleware);
+     *    — убрать позицию из корзины (dispatch / listenerMiddleware);
      *    — useNavigate → navigate({ pathname: '/products', search: listSearch }).
      * 3. Обработать rejected (сообщение пользователю).
      */

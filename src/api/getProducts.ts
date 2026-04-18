@@ -3,8 +3,8 @@ import type { Product } from "../types/Product";
 const DEFAULT_BASE_URL = "http://localhost:3006";
 
 /*
- * TODO(лекция): 
- * Рядом добавить postProduct, updateProduct, deleteProduct и подключить к thunk + UI (см. ProductFormPage, ProductDetailPage).
+ * TODO-01 (лекция): доработать getProducts (fetch: ошибки, при желании signal/таймаут)
+ * и рядом добавить postProduct, updateProduct, deleteProduct под ваш сервер.
  */
 
 export async function getProducts(
@@ -19,4 +19,4 @@ export async function getProducts(
   return res.json() as Promise<Product[]>;
 }
 
-// TODO(лекция): переписать на axios
+// TODO-02 (лекция): переписать выбранные запросы на axios (instance, interceptors по желанию).

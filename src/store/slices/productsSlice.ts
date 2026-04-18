@@ -30,11 +30,11 @@ export const productsSlice = createSlice({
       });
 
     /*
-     * TODO(лекция): обработать fulfilled/pending/rejected для thunks мутаций, например:
-     * — после post: добавить товар в state.products или заново dispatch(getProductsThunk);
+     * TODO-04 (лекция): extraReducers для thunks из TODO-03, например:
+     * — после post: push в state.products или снова dispatch(getProductsThunk);
      * — после patch: заменить элемент по id;
      * — после delete: отфильтровать по id;
-     * при необходимости ввести отдельный status для «сохранения», чтобы крутить спиннер на форме.
+     * при необходимости отдельный status «сохранение» для спиннера на форме.
      */
   },
 });
