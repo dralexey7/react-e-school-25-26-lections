@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import { Categories } from "../../components/Categories/Categories";
 import { useCategorySelect } from "../../hooks/useCategorySelect";
 import { mockProducts } from "../../materials/mock";
@@ -15,7 +15,13 @@ export const Layout = () => {
   return (
     <div className={styles.root}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Каталог</h1>
+        <div className={styles.headerRow}>
+          <h1 className={styles.title}>Каталог</h1>
+          {/* TODO(лекция): после CRUD по желанию показывать только «админам» или вынести в отдельный раздел */}
+          <Link className={styles.addProduct} to="/products/new">
+            + Добавить товар
+          </Link>
+        </div>
       </header>
       <div style={{ display: "flex" }}>
         <Categories

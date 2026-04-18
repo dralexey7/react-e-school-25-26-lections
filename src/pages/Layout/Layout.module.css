@@ -9,6 +9,30 @@
   padding: 1.25rem 1.5rem 0.5rem;
 }
 
+.headerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.addProduct {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-on-primary);
+  text-decoration: none;
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+.addProduct:hover {
+  filter: brightness(1.06);
+}
+
 .title {
   margin: 0;
   font-size: 1.75rem;

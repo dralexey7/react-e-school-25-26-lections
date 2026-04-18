@@ -10,6 +10,8 @@ import { selectProductsStatus } from "../../store/selectors/selectProductsStatus
 
 export const ProductsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
+
+  // TODO(лекция): при необходимости повторно дергать getProductsThunk после мутаций (navigate с key / dispatch из формы).
   useEffect(() => {
     dispatch(getProductsThunk());
   }, [dispatch]);

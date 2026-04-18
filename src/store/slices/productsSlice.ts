@@ -28,6 +28,14 @@ export const productsSlice = createSlice({
       .addCase(getProductsThunk.rejected, (state) => {
         state.status = "rejected";
       });
+
+    /*
+     * TODO(лекция): обработать fulfilled/pending/rejected для thunks мутаций, например:
+     * — после post: добавить товар в state.products или заново dispatch(getProductsThunk);
+     * — после patch: заменить элемент по id;
+     * — после delete: отфильтровать по id;
+     * при необходимости ввести отдельный status для «сохранения», чтобы крутить спиннер на форме.
+     */
   },
 });
 

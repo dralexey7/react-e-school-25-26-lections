@@ -14,6 +14,7 @@ export const ProductDetailPage = () => {
   const location = useLocation();
   const listSearch = location.search;
 
+  // TODO(лекция): брать товар из Redux (список с сервера), чтобы после create/update/delete UI не расходился с API.
   const product = mockProducts.find((p) => p.id === productId);
 
   const quantity = useSelector((state: RootState) =>
@@ -34,6 +35,17 @@ export const ProductDetailPage = () => {
     dispatch(deleteFromBasket(product.id));
   };
 
+  const handleDeleteProduct = () => {
+    /*
+     * TODO(лекция):
+     * 1. Подтверждение: window.confirm(...) или свой модал.
+     * 2. dispatch(deleteProductThunk(product.id)) и при успехе:
+     *    — убрать позицию из корзины (отдельный dispatch / listenerMiddleware);
+     *    — useNavigate → navigate({ pathname: '/products', search: listSearch }).
+     * 3. Обработать rejected (сообщение пользователю).
+     */
+  };
+
   return (
     <div className={styles.page}>
       <Link
@@ -45,6 +57,21 @@ export const ProductDetailPage = () => {
 
       <article className={styles.surface}>
         <header className={styles.header}>
+          <div className={styles.toolbar}>
+            <Link
+              className={styles.editLink}
+              to={{ pathname: `/products/${product.id}/edit`, search: listSearch }}
+            >
+              Редактировать
+            </Link>
+            <button
+              type="button"
+              className={styles.deleteButton}
+              onClick={handleDeleteProduct}
+            >
+              Удалить
+            </button>
+          </div>
           <div className={styles.badges}>
             {product.categories.map((c) => (
               <span key={c} className={styles.badge}>
