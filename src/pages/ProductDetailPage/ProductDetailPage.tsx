@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import { Counter } from "../../components/Counter/Counter";
-import { mockProducts } from "../../materials/mock";
+
 import { selectProductCountById } from "../../store/selectors/selectProductCountById";
 import { addToBasket, deleteFromBasket } from "../../store/slices/basketSlice";
 import type { AppDispatch, RootState } from "../../store/store";
 import styles from "./ProductDetailPage.module.css";
 import { ProductNotFound } from "./ProductNotFound";
+import { selectProductById } from "../../store/selectors/selectProducById";
+import { deleteProductThunk } from "../../api/deleteProductThunk";
 
 export const ProductDetailPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,9 +16,17 @@ export const ProductDetailPage = () => {
   const location = useLocation();
   const listSearch = location.search;
 
-  // TODO-05 (лекция): брать товар из Redux (селектор по productId), чтобы деталка совпадала с API после CRUD.
-  const product = mockProducts.find((p) => p.id === productId);
+  const navigate = useNavigate();
 
+  // TODO-05 (лекция): брать товар из Redux (селектор по productId), чтобы деталка совпадала с API после CRUD.
+
+  if (!productId) {
+    return <ProductNotFound catalogSearch={listSearch} />;
+  }
+
+  const product = useSelector((state: RootState) => selectProductById(state, productId));
+
+  
   const quantity = useSelector((state: RootState) =>
     productId ? selectProductCountById(state, productId) : 0,
   );
@@ -44,6 +54,14 @@ export const ProductDetailPage = () => {
      *    — useNavigate → navigate({ pathname: '/products', search: listSearch }).
      * 3. Обработать rejected (сообщение пользователю).
      */
+
+    const confirmed = window.confirm("Вы уверены, что хотите удалить этот товар?");
+    if (!confirmed) {
+      return;
+    }
+
+    dispatch(deleteProductThunk(product.id)).unwrap();
+    navigate({ pathname: "/products"});
   };
 
   return (

@@ -1,5 +1,5 @@
-import type { Product } from "../types/Product";
 import axios from "axios";
+import type { Product } from "../types/Product";
 
 const DEFAULT_BASE_URL = "http://localhost:3006";
 
@@ -8,10 +8,14 @@ const DEFAULT_BASE_URL = "http://localhost:3006";
  * и рядом добавить postProduct, updateProduct, deleteProduct под ваш сервер.
  */
 
-// export async function getProducts(
+// export async function postProduct(
 //   baseUrl: string = DEFAULT_BASE_URL,
+//   product: Omit<Product, "id">,
 // ): Promise<Product[]> {
-//   const res = await fetch(`${baseUrl}/products`);
+//   const res = await fetch(`${baseUrl}/products`, {
+//     method: "POST",
+//     body: JSON.stringify(product)
+//   });
 //   console.log(res);
 //   if (!res.ok) {
 //     throw new Error(`getProducts failed: ${res.status} ${res.statusText}`);
@@ -20,10 +24,9 @@ const DEFAULT_BASE_URL = "http://localhost:3006";
 //   return res.json() as Promise<Product[]>;
 // }
 
-export async function getProducts() : Promise<Product[]> {
-  const res = await axios.get(`${DEFAULT_BASE_URL}/products`);
+export async function postProduct(product: Omit<Product, "id">) : Promise<Product> {
+  const res = await axios.post(`${DEFAULT_BASE_URL}/products`, product);
   return res.data;
 }
 
 // TODO-02 (лекция): переписать выбранные запросы на axios (instance, interceptors по желанию).
-

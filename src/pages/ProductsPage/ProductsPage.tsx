@@ -11,7 +11,6 @@ import { selectProductsStatus } from "../../store/selectors/selectProductsStatus
 export const ProductsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  // TODO-08 (лекция): при необходимости снова dispatch(getProductsThunk) после мутаций или полагаться только на TODO-04.
   useEffect(() => {
     dispatch(getProductsThunk());
   }, [dispatch]);

@@ -1,8 +1,12 @@
 import { type FormEvent, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
+import { useDispatch } from "react-redux";
 import { mockProducts } from "../../materials/mock";
 import type { Product } from "../../types/Product";
 import styles from "./ProductFormPage.module.css";
+import { postProductThunk } from "../../api/postProductThunk";
+import { updateProductThunk } from "../../api/updateProductThunk";
+import type { AppDispatch } from "../../store/store";
 
 export type ProductFormPageProps = {
   mode: "create" | "edit";
@@ -82,7 +86,9 @@ function ProductFormBody({
     initialProduct ? productToFormFields(initialProduct) : emptyFields(),
   );
 
-  const handleSubmit = (e: FormEvent) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (mode === "edit" && !editingProductId) {
       return;
@@ -110,6 +116,16 @@ function ProductFormBody({
      * — create: postProductThunk(payload) → navigate(`/products/${newId}`).
      * — edit: updateProductThunk({ id: editingProductId!, ...payload }) → navigate назад или на карточку.
      */
+
+    let data: Product;
+
+    if (mode === "create") {
+      data = await dispatch(postProductThunk(payload)).unwrap();
+    } else {
+      data = await dispatch(updateProductThunk({ id: editingProductId!, ...payload })).unwrap();
+    }
+
+    navigate(`/products/${data.id}`);
     void payload;
   };
 
@@ -260,7 +276,7 @@ function ProductFormBody({
           </div>
 
           <div className={styles.actions}>
-            <button type="submit" className={styles.submit}>
+            <button type="submit" className={styles.submit} onSubmit={handleSubmit}>
               Сохранить
             </button>
             <button

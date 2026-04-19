@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { Product } from "../../types/Product";
 import { getProductsThunk } from "../../api/getProductsThunk";
+import { postProductThunk } from "../../api/postProductThunk";
+import { updateProductThunk } from "../../api/updateProductThunk";
+import { deleteProductThunk } from "../../api/deleteProductThunk";
 
 interface ProductsSliceState {
   status: "idle" | "pending" | "fulfilled" | "rejected";
@@ -27,15 +30,37 @@ export const productsSlice = createSlice({
       })
       .addCase(getProductsThunk.rejected, (state) => {
         state.status = "rejected";
+      })
+      .addCase(postProductThunk.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(postProductThunk.fulfilled, (state, action) => {
+        state.products.push(action.payload);
+        state.status = "fulfilled";
+      })
+      .addCase(postProductThunk.rejected, (state) => {
+        state.status = "rejected";
+      })
+      .addCase(updateProductThunk.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(updateProductThunk.fulfilled, (state, action) => {
+        state.products = state.products.map(product => product.id === action.payload.id ? action.payload : product);
+        state.status = "fulfilled";
+      })
+      .addCase(updateProductThunk.rejected, (state) => {
+        state.status = "rejected";
+      })
+      .addCase(deleteProductThunk.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(deleteProductThunk.fulfilled, (state, action) => {
+        state.products = state.products.filter(product => product.id !== action.payload);
+        state.status = "fulfilled";
+      })
+      .addCase(deleteProductThunk.rejected, (state) => {
+        state.status = "rejected";
       });
-
-    /*
-     * TODO-04 (лекция): extraReducers для thunks из TODO-03, например:
-     * — после post: push в state.products или снова dispatch(getProductsThunk);
-     * — после patch: заменить элемент по id;
-     * — после delete: отфильтровать по id;
-     * при необходимости отдельный status «сохранение» для спиннера на форме.
-     */
   },
 });
 
