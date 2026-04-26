@@ -11,6 +11,12 @@ import { selectProductsStatus } from "../../store/selectors/selectProductsStatus
 export const ProductsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  /*
+   * TODO-RTKQ-03 (livecoding): заменить блок с dispatch + useSelector на RTK Query hooks:
+   * 1) useGetProductsQuery({ category: selectedCategory ?? undefined }) для обычного списка.
+   * 2) хук для infinite endpoint-а (имя возьмется из createApi автоматически).
+   * 3) собрать flat-массив из pages и добавить кнопку "Загрузить еще" (fetchNextPage).
+   */
   useEffect(() => {
     dispatch(getProductsThunk());
   }, [dispatch]);

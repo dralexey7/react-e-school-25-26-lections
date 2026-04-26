@@ -3,11 +3,6 @@ import axios from "axios";
 
 const DEFAULT_BASE_URL = "http://localhost:3006";
 
-/*
- * TODO-01 (лекция): доработать getProducts (fetch: ошибки, при желании signal/таймаут)
- * и рядом добавить postProduct, updateProduct, deleteProduct под ваш сервер.
- */
-
 // export async function updateProduct(
 //   baseUrl: string = DEFAULT_BASE_URL,
 //   product: {id: string} & Partial<Omit<Product, "id">>,
@@ -32,5 +27,3 @@ export async function updateProduct(
       const res = await axios.patch(`${DEFAULT_BASE_URL}/products/${product.id}`, product);
       return res.data;
   }
-
-// TODO-02 (лекция): переписать выбранные запросы на axios (instance, interceptors по желанию).

@@ -1,12 +1,9 @@
 import { type FormEvent, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import { useDispatch } from "react-redux";
 import { mockProducts } from "../../materials/mock";
 import type { Product } from "../../types/Product";
 import styles from "./ProductFormPage.module.css";
-import { postProductThunk } from "../../api/postProductThunk";
-import { updateProductThunk } from "../../api/updateProductThunk";
-import type { AppDispatch } from "../../store/store";
+import { useAddProductMutation, useGetProductByIdQuery, useUpdateProductMutation } from "../../store/services/product";
 
 export type ProductFormPageProps = {
   mode: "create" | "edit";
@@ -69,9 +66,9 @@ const emptyFields = () => ({
 
 type ProductFormBodyProps = {
   mode: "create" | "edit";
-  /** Для режима edit — id из URL (нужен для updateProductThunk). */
+  /** Для режима edit — id из URL (нужен для update mutation). */
   editingProductId?: string;
-  /** Для create — undefined; для edit — источник данных см. TODO-05 / стор после TODO-04. */
+  /** Для create — undefined; для edit — источник данных см. TODO-RTKQ-04 (query по id). */
   initialProduct?: Product;
 };
 
@@ -82,11 +79,22 @@ function ProductFormBody({
   initialProduct,
 }: ProductFormBodyProps) {
   const navigate = useNavigate();
+  const {data: product, isLoading: isLoadingProduct, isError: isErrorProduct} = useGetProductByIdQuery({ id: editingProductId! });
+  console.log({product, editingProductId})
   const [fields, setFields] = useState(() =>
-    initialProduct ? productToFormFields(initialProduct) : emptyFields(),
+    initialProduct ? productToFormFields(product ? product : initialProduct) : emptyFields(),
   );
 
-  const dispatch = useDispatch<AppDispatch>();
+  const [updateProduct, {isLoading: isLoadingUpdate, isError: isErrorUpdate}] = useUpdateProductMutation();
+  const [addProduct, {isLoading: isLoadingAdd, isError: isErrorAdd}] = useAddProductMutation();
+
+
+  if (isErrorProduct || isErrorUpdate || isErrorAdd) {
+    return <div>Error</div>
+  }
+  if (isLoadingProduct || isLoadingUpdate || isLoadingAdd) {
+    return <div>Loading</div>
+  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -111,22 +119,16 @@ function ProductFormBody({
       },
     };
 
-    /*
-     * TODO-06 (лекция): отправить payload (thunks из TODO-03) и обновить стор (TODO-04).
-     * — create: postProductThunk(payload) → navigate(`/products/${newId}`).
-     * — edit: updateProductThunk({ id: editingProductId!, ...payload }) → navigate назад или на карточку.
-     */
-
-    let data: Product;
 
     if (mode === "create") {
-      data = await dispatch(postProductThunk(payload)).unwrap();
+      addProduct(payload);
     } else {
-      data = await dispatch(updateProductThunk({ id: editingProductId!, ...payload })).unwrap();
+      updateProduct({ id: editingProductId!, ...payload }).unwrap();
     }
 
-    navigate(`/products/${data.id}`);
-    void payload;
+    if (product) {
+      navigate(`/products/${product.id}`);
+    }
   };
 
   const title = mode === "create" ? "Новый товар" : "Редактирование";
@@ -317,7 +319,7 @@ export const ProductFormPage = ({ mode }: ProductFormPageProps) => {
     );
   }
 
-  // TODO-09 (лекция): когда initialProduct из Redux — расширить key (revision/updatedAt), чтобы форма сбрасывалась после refetch.
+  // TODO-RTKQ-07 (livecoding): когда initialProduct придет из query, убедиться что key учитывает обновления после refetch.
   const formKey = `${mode}-${productId ?? "new"}`;
 
   return (

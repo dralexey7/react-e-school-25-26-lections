@@ -8,6 +8,7 @@ import type { AppDispatch, RootState } from "../../store/store";
 import styles from "./ProductDetailPage.module.css";
 import { ProductNotFound } from "./ProductNotFound";
 import { selectProductById } from "../../store/selectors/selectProducById";
+import { useGetProductByIdQuery } from "../../store/services/product";
 import { deleteProductThunk } from "../../api/deleteProductThunk";
 
 export const ProductDetailPage = () => {
@@ -16,20 +17,29 @@ export const ProductDetailPage = () => {
   const location = useLocation();
   const listSearch = location.search;
 
+
+
   const navigate = useNavigate();
 
-  // TODO-05 (лекция): брать товар из Redux (селектор по productId), чтобы деталка совпадала с API после CRUD.
+  const { data: product, isLoading, isError } = useGetProductByIdQuery({ id: productId! });
 
-  if (!productId) {
-    return <ProductNotFound catalogSearch={listSearch} />;
-  }
-
-  const product = useSelector((state: RootState) => selectProductById(state, productId));
-
-  
   const quantity = useSelector((state: RootState) =>
     productId ? selectProductCountById(state, productId) : 0,
   );
+
+  if (isError) {
+    return <div>Error</div>
+  }
+  if (isLoading) {
+    return <div>Loading</div>
+  }
+
+  // TODO-RTKQ-04 (livecoding): получать товар через useGetProductByIdQuery(productId).
+  // Тогда можно убрать зависимость от products slice/selectors в этой странице.
+
+  if (!product) {
+    return <ProductNotFound catalogSearch={listSearch} />;
+  }
 
   if (!product) {
     return <ProductNotFound catalogSearch={listSearch} />;
@@ -47,12 +57,9 @@ export const ProductDetailPage = () => {
 
   const handleDeleteProduct = () => {
     /*
-     * TODO-07 (лекция):
-     * 1. Подтверждение: window.confirm(...) или свой модал.
-     * 2. dispatch(deleteProductThunk(product.id)) и при успехе:
-     *    — убрать позицию из корзины (dispatch / listenerMiddleware);
-     *    — useNavigate → navigate({ pathname: '/products', search: listSearch }).
-     * 3. Обработать rejected (сообщение пользователю).
+     * TODO-RTKQ-05 (livecoding):
+     * заменить deleteProductThunk на useDeleteProductMutation.
+     * После await deleteProduct(id).unwrap() выполнить navigate назад к каталогу.
      */
 
     const confirmed = window.confirm("Вы уверены, что хотите удалить этот товар?");

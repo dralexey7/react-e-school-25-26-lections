@@ -29,9 +29,37 @@ function mergeSpecifications(
   };
 }
 
+function toPositiveInt(value: unknown, fallback: number): number {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) {
+    return fallback;
+  }
+  return Math.max(0, Math.floor(parsed));
+}
+
 app.get("/products", async (_req, res) => {
   await new Promise((r) => setTimeout(r, 2000));
-  res.json(products);
+  const { cursor, limit } = _req.query;
+
+  // Backward compatibility: without pagination params keep old contract (array).
+  if (cursor === undefined && limit === undefined) {
+    res.json(products);
+    return;
+  }
+
+  const pageSize = Math.max(1, toPositiveInt(limit, 10));
+  const start = toPositiveInt(cursor, 0);
+  const safeStart = Math.min(start, products.length);
+  const items = products.slice(safeStart, safeStart + pageSize);
+  const nextCursor = safeStart + items.length;
+  const hasMore = nextCursor < products.length;
+
+  res.json({
+    items,
+    nextCursor: hasMore ? String(nextCursor) : null,
+    hasMore,
+    total: products.length,
+  });
 });
 
 app.get("/products/:id", (req, res) => {

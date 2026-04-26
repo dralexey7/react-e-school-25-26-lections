@@ -3,11 +3,6 @@ import axios from "axios";
 
 const DEFAULT_BASE_URL = "http://localhost:3006";
 
-/*
- * TODO-01 (лекция): доработать getProducts (fetch: ошибки, при желании signal/таймаут)
- * и рядом добавить postProduct, updateProduct, deleteProduct под ваш сервер.
- */
-
 // export async function getProducts(
 //   baseUrl: string = DEFAULT_BASE_URL,
 // ): Promise<Product[]> {
@@ -25,5 +20,12 @@ export async function getProducts() : Promise<Product[]> {
   return res.data;
 }
 
-// TODO-02 (лекция): переписать выбранные запросы на axios (instance, interceptors по желанию).
+/*
+ * TODO-RTKQ-08 (livecoding):
+ * Этот файл станет не нужен после перехода на createApi.
+ * В productsApi добавить:
+ * - query getProducts (обычный список),
+ * - infiniteQuery с запросом /products?cursor=...&limit=...
+ *   и ответом { items, nextCursor, hasMore, total }.
+ */
 

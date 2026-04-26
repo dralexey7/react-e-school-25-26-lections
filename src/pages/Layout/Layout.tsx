@@ -17,7 +17,6 @@ export const Layout = () => {
       <header className={styles.header}>
         <div className={styles.headerRow}>
           <h1 className={styles.title}>Каталог</h1>
-          {/* TODO-10 (лекция): по желанию — показывать «+ Добавить» только админам или вынести в отдельный раздел. */}
           <Link className={styles.addProduct} to="/products/new">
             + Добавить товар
           </Link>
